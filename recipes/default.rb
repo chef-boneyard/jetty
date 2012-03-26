@@ -18,7 +18,7 @@
 
 include_recipe "java"
 
-case node.platform
+case node['platform']
 when "centos","redhat","fedora"
   include_recipe "jpackage"
 end
