@@ -23,7 +23,7 @@ default["jetty"]["jetty_args"] = ""
 default["jetty"]["java_options"] = "-Xmx256m -Djava.awt.headless=true"
 
 case platform
-when "centos","redhat","fedora"
+when "amazon","centos","redhat","scientific","fedora"
   set["jetty"]["user"] = "root"
   set["jetty"]["group"] = "root"
   set["jetty"]["home"] = "/usr/share/jetty6"

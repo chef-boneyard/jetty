@@ -19,7 +19,7 @@
 include_recipe "java"
 
 case node['platform']
-when "centos","redhat","fedora"
+when "amazon","centos","redhat","scientific","fedora"
   include_recipe "jpackage"
 end
 
@@ -40,7 +40,7 @@ end
 
 service "jetty" do
   case node["platform"]
-  when "centos","redhat","fedora"
+  when "amazon","centos","redhat","scientific","fedora"
     service_name "jetty6"
     supports :restart => true
   when "debian","ubuntu"
