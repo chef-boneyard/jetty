@@ -55,5 +55,5 @@ template "/etc/default/jetty" do
   owner "root"
   group "root"
   mode "0644"
-  notifies :restart, resources(:service => "jetty")
+  notifies :restart, resources(:service => "jetty"), :delayed
 end
