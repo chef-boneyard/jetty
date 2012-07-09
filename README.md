@@ -52,7 +52,8 @@ License and Author
 ==================
 
 Author:: Seth Chisamore (<schisamo@opscode.com>)
-Author:: Brian Dols (<brian.dols@gmail.com>)
+
+Contributor:: Brian Dols (<brian.dols@gmail.com>)
 
 Copyright:: 2010, Opscode, Inc
 
