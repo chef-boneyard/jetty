@@ -22,7 +22,7 @@ template "/etc/jetty/realm.properties" do
     source "realm.properties.erb"
     variables(
         :username => node['jetty']['cargo']['username'],
-        :password => node['jetty']['cargo']['password']
+        :password => node['jetty']['cargo']['password'].crypt("Zz")
     )
     mode 0644
     owner "root"
