@@ -57,3 +57,13 @@ template "/etc/default/jetty" do
   mode "0644"
   notifies :restart, resources(:service => "jetty"), :delayed
 end
+
+template "/etc/jetty/jetty.xml" do
+  source "jetty.xml.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+  notifies :restart, resources(:service => "jetty"), :delayed
+end
+
+
