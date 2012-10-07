@@ -18,11 +18,16 @@
 
 include_recipe "jetty::default"
 
+::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
+
+password = node['jetty']['cargo']['password'].crypt('Zz') if node['jetty']['cargo']['password'] != "_X_OPENSSL_X_"
+password = secure_password if node['jetty']['cargo']['password'] == "_X_OPENSSL_X_"
+
 template "/etc/jetty/realm.properties" do
     source "realm.properties.erb"
     variables(
         :username => node['jetty']['cargo']['username'],
-        :password => node['jetty']['cargo']['password'].crypt("Zz")
+        :password => password
     )
     mode 0644
     owner "root"
