@@ -21,8 +21,8 @@ include_recipe "jetty::default"
 template "/etc/jetty/realm.properties" do
     source "realm.properties.erb"
     variables(
-        :username => node[:jetty][:cargo][:username],
-        :password => node[:jetty][:cargo][:password]
+        :username => node['jetty']['cargo']['username'],
+        :password => node['jetty']['cargo']['password']
     )
     mode 0644
     owner "root"
@@ -31,7 +31,7 @@ template "/etc/jetty/realm.properties" do
 end
 
 
-web_xml = node[:jetty][:webapp_dir] + "/cargo-jetty-6/WEB-INF/web.xml"
+web_xml = node['jetty']['webapp_dir'] + "/cargo-jetty-6/WEB-INF/web.xml"
 
 cookbook_file web_xml do
     source "web.xml"
@@ -58,8 +58,8 @@ end
 
 
 remote_file "/usr/share/jetty/webapps/cargo-jetty-6-and-earlier-deployer-1.2.2.war" do
-    source node[:jetty][:cargo][:jetty6][:source][:url]
-    checksum node[:jetty][:cargo][:jetty6][:source][:sha256checksum]
+    source node['jetty']['cargo']['jetty6']['source']['url']
+    checksum node['jetty']['cargo']['jetty6']['source']['checksum']
     mode 0644
     owner "jetty"
     group "jetty"
