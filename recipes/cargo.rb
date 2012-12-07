@@ -20,14 +20,29 @@ include_recipe "jetty::default"
 
 ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
 
-password = node['jetty']['cargo']['password'].crypt('Zz') if node['jetty']['cargo']['password'] != "_X_OPENSSL_X_"
-password = secure_password if node['jetty']['cargo']['password'] == "_X_OPENSSL_X_"
+if Chef::Config[:solo]
+    if node['jetty']['cargo']['password'].nil?
+        Chef::Application.fatal!([ 'For chef-solo execution, you must set ',
+                                   ' { ',
+                                   '   "jetty": {',
+                                   '     "cargo": {',
+                                   '       "password": "temporarypassword"',
+                                   '     }',
+                                   '   }',
+                                   ' }',
+                                   ' in the json_attributes that are passed into chef-solo.'].join(' '))
+    else
+        node['jetty']['cargo']['password'] = node['jetty']['cargo']['password'].crypt('Zz')
+    end
+else
+    node.set_unless['jetty']['cargo']['password'] = secure_password
+end
 
 template "/etc/jetty/realm.properties" do
     source "realm.properties.erb"
     variables(
         :username => node['jetty']['cargo']['username'],
-        :password => password
+        :password => node['jetty']['cargo']['password']
     )
     mode 0644
     owner "root"
