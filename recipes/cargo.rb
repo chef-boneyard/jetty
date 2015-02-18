@@ -2,7 +2,7 @@
 # Cookbook Name:: jetty
 # Recipe:: cargo
 #
-# Copyright 2012, Opscode, Inc.
+# Copyright 2012, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 
 include_recipe "jetty::default"
 
-::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
+::Chef::Recipe.send(:include, Chef::OpenSSL::Password)
 
 if Chef::Config[:solo]
     if node['jetty']['cargo']['password'].nil?
