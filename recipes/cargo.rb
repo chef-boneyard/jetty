@@ -18,7 +18,7 @@
 
 include_recipe "jetty::default"
 
-::Chef::Recipe.send(:include, Chef::OpenSSL::Password)
+::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
 
 if Chef::Config[:solo]
     if node['jetty']['cargo']['password'].nil?
