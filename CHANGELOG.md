@@ -1,6 +1,10 @@
 jetty cookbook
 --------------
 
+v0.1.5
+------
+- reverting OpenSSL module namespace change
+
 v0.1.4
 ------
 - Updating to work with latest openssl cookbook
