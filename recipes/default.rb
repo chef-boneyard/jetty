@@ -16,21 +16,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include_recipe "java"
+include_recipe 'java'
 
-case node["platform"]
-when "centos","redhat","fedora"
-  include_recipe "jpackage"
+case node['platform']
+when 'centos', 'redhat', 'fedora'
+  include_recipe 'jpackage'
 end
 
 jetty_pkgs = value_for_platform(
-  ["debian","ubuntu"] => {
-    "default" => ["jetty","libjetty-extra"]
+  %w(debian ubuntu) => {
+    'default' => ['jetty', 'libjetty-extra']
   },
-  ["centos","redhat","fedora"] => {
-    "default" => ["jetty6","jetty6-jsp-2.1","jetty6-management"]
+  %w(centos redhat fedora) => {
+    'default' => ['jetty6', 'jetty6-jsp-2.1', 'jetty6-management']
   },
-  "default" => ["jetty"]
+  'default' => ['jetty']
 )
 jetty_pkgs.each do |pkg|
   package pkg do
@@ -38,32 +38,30 @@ jetty_pkgs.each do |pkg|
   end
 end
 
-service "jetty" do
-  case node["platform"]
-  when "centos","redhat","fedora"
-    service_name "jetty6"
-    supports :restart => true
-  when "debian","ubuntu"
-    service_name "jetty"
-    supports :restart => true, :status => true
+service 'jetty' do
+  case node['platform']
+  when 'centos', 'redhat', 'fedora'
+    service_name 'jetty6'
+    supports restart: true
+  when 'debian', 'ubuntu'
+    service_name 'jetty'
+    supports restart: true, status: true
     action [:enable, :start]
   end
 end
 
-template "/etc/default/jetty" do
-  source "default_jetty.erb"
-  owner "root"
-  group "root"
-  mode "0644"
-  notifies :restart, "service[jetty]"
+template '/etc/default/jetty' do
+  source 'default_jetty.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  notifies :restart, 'service[jetty]'
 end
 
-template "/etc/jetty/jetty.xml" do
-  source "jetty.xml.erb"
-  owner "root"
-  group "root"
-  mode "0644"
-  notifies :restart, "service[jetty]"
+template '/etc/jetty/jetty.xml' do
+  source 'jetty.xml.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
+  notifies :restart, 'service[jetty]'
 end
-
-

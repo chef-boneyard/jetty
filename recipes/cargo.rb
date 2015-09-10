@@ -16,76 +16,71 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-include_recipe "jetty::default"
+include_recipe 'jetty::default'
 
 ::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
 
 if Chef::Config[:solo]
-    if node['jetty']['cargo']['password'].nil?
-        Chef::Application.fatal!([ 'For chef-solo execution, you must set ',
-                                   ' { ',
-                                   '   "jetty": {',
-                                   '     "cargo": {',
-                                   '       "password": "temporarypassword"',
-                                   '     }',
-                                   '   }',
-                                   ' }',
-                                   ' in the json_attributes that are passed into chef-solo.'].join(' '))
-    else
-        node['jetty']['cargo']['password'] = node['jetty']['cargo']['password'].crypt('Zz')
-    end
+  if node['jetty']['cargo']['password'].nil?
+    Chef::Application.fatal!(['For chef-solo execution, you must set ',
+                              ' { ',
+                              '   "jetty": {',
+                              '     "cargo": {',
+                              '       "password": "temporarypassword"',
+                              '     }',
+                              '   }',
+                              ' }',
+                              ' in the json_attributes that are passed into chef-solo.'].join(' '))
+  else
+    node['jetty']['cargo']['password'] = node['jetty']['cargo']['password'].crypt('Zz')
+  end
 else
-    node.set_unless['jetty']['cargo']['password'] = secure_password
+  node.set_unless['jetty']['cargo']['password'] = secure_password
 end
 
-template "/etc/jetty/realm.properties" do
-    source "realm.properties.erb"
-    variables(
-        :username => node['jetty']['cargo']['username'],
-        :password => node['jetty']['cargo']['password']
-    )
-    mode 0644
-    owner "root"
-    group "root"
-    notifies :restart, "service[jetty]"
+template '/etc/jetty/realm.properties' do
+  source 'realm.properties.erb'
+  variables(
+    username: node['jetty']['cargo']['username'],
+    password: node['jetty']['cargo']['password']
+  )
+  mode 0644
+  owner 'root'
+  group 'root'
+  notifies :restart, 'service[jetty]'
 end
 
-
-web_xml = node['jetty']['webapp_dir'] + "/cargo-jetty-6/WEB-INF/web.xml"
+web_xml = node['jetty']['webapp_dir'] + '/cargo-jetty-6/WEB-INF/web.xml'
 
 cookbook_file web_xml do
-    source "web.xml"
-    mode 0644
-    owner "jetty"
-    group "jetty"
-    action :nothing
-    notifies :restart, "service[jetty]"
+  source 'web.xml'
+  mode 0644
+  owner 'jetty'
+  group 'jetty'
+  action :nothing
+  notifies :restart, 'service[jetty]'
 end
 
-script "extract war" do
-    interpreter "bash"
-    user "jetty"
-    cwd "/usr/share/jetty/webapps/"
-    code <<-EOH
+script 'extract war' do
+  interpreter 'bash'
+  user 'jetty'
+  cwd '/usr/share/jetty/webapps/'
+  code <<-EOH
       mkdir cargo-jetty-6
       cd cargo-jetty-6
       jar xf ../cargo-jetty-6-and-earlier-deployer-1.2.2.war
     EOH
-    notifies :restart, "service[jetty]"
-    action :nothing
+  notifies :restart, 'service[jetty]'
+  action :nothing
 end
 
-
-
-remote_file "/usr/share/jetty/webapps/cargo-jetty-6-and-earlier-deployer-1.2.2.war" do
-    source node['jetty']['cargo']['jetty6']['source']['url']
-    checksum node['jetty']['cargo']['jetty6']['source']['checksum']
-    mode 0644
-    owner "jetty"
-    group "jetty"
-    notifies :run, "script[extract war]", :immediately
-    notifies :create, "cookbook_file[web_xml]", :immediately
-    notifies :restart, "service[jetty]"
+remote_file '/usr/share/jetty/webapps/cargo-jetty-6-and-earlier-deployer-1.2.2.war' do
+  source node['jetty']['cargo']['jetty6']['source']['url']
+  checksum node['jetty']['cargo']['jetty6']['source']['checksum']
+  mode 0644
+  owner 'jetty'
+  group 'jetty'
+  notifies :run, 'script[extract war]', :immediately
+  notifies :create, 'cookbook_file[web_xml]', :immediately
+  notifies :restart, 'service[jetty]'
 end
-
-
