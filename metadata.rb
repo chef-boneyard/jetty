@@ -15,3 +15,6 @@ end
 end
 
 recipe "jetty::default", "Installs and configures Jetty"
+
+source_url 'https://github.com/chef-cookbooks/jetty' if respond_to?(:source_url)
+issues_url 'https://github.com/chef-cookbooks/jetty/issues' if respond_to?(:issues_url)
