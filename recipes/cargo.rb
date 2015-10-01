@@ -32,7 +32,7 @@ if Chef::Config[:solo]
                               ' }',
                               ' in the json_attributes that are passed into chef-solo.'].join(' '))
   else
-    node['jetty']['cargo']['password'] = node['jetty']['cargo']['password'].crypt('Zz')
+    node.normal['jetty']['cargo']['password'] = node['jetty']['cargo']['password'].crypt('Zz')
   end
 else
   node.set_unless['jetty']['cargo']['password'] = secure_password
