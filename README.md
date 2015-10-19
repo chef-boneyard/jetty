@@ -1,5 +1,5 @@
 jetty Cookbook
-==============jetty
+==============
 
 [![Build Status](https://travis-ci.org/chef-cookbooks/jetty.svg?branch=master)](http://travis-ci.org/chef-cookbooks/jetty)
 [![Cookbook Version](https://img.shields.io/cookbook/v/jetty.svg)](https://supermarket.chef.io/cookbooks/jetty)
@@ -7,22 +7,21 @@ jetty Cookbook
 Installs and configures Jetty, Java servlet engine and webserver.
 
 Requirements
-============
-
-Platform: 
-
+------------
+#### Platforms
 * Debian, Ubuntu (OpenJDK, Sun)
 * CentOS, Red Hat, Fedora (OpenJDK)
 
-The following Chef Software cookbooks are dependencies:
+#### Chef
+- Chef 11+
 
+#### Cookbooks
 * java
 * jpackage
 * openssl
 
 Attributes
-==========
-
+----------
 * `node["jetty"]["host"]` - Listen to connections from this network host, default '0.0.0.0'.
 * `node["jetty"]["port"]` - The network port used by Jetty, default '8080'.
 * `node["jetty"]["jetty_args"]` - Additional arguments to pass to Jetty, default ''.
@@ -32,7 +31,7 @@ Attributes
 
 
 Recipes
-=======
+-------------------
 
 ## default.rb
 
@@ -52,7 +51,7 @@ To establish a password, set a default attribute like so:
   },
 
 Usage
-=====
+-----
 
 Simply include the recipe where you want Jetty installed.
 
@@ -62,9 +61,8 @@ TODO
 * enable SSL support
 * instrument logging
 
-License and Author
-==================
-
+License & Authors
+-----------------
 Author:: Seth Chisamore (<schisamo@chef.io>)
 
 ```text
