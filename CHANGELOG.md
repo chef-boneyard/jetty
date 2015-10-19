@@ -2,6 +2,26 @@ jetty cookbook CHANGELOG
 ========================
 This file is used to list changes made in each version of the jetty cookbook.
 
+v0.1.6
+------
+* Fix node attribute level in the recipe to fix Chef 12 support
+* Added gitignore and chefignore files
+* Added Test Kitchen config
+* Added Rubocop config
+* Added Travis config
+* Added Berksfile
+* Updated Testing and Contributing docs
+* Added maintainers.toml and maintainers.md files
+* Added Gemfile with development dependencies
+* Added Travis and cookbook version badges to the Readme
+* Expanded the requirements section in the Readme
+* Added a Rakefile for simplified testing
+* Added issues_url and source_url to the metadata.rb
+* Updated Opscode -> Chef Software
+* Added basic Chefspec converge test
+* Converted symbols to strings for Foodcritic
+* Resolved all Rubocop warnings
+
 v0.1.5
 ------
 - reverting OpenSSL module namespace change
