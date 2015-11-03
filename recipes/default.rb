@@ -23,27 +23,22 @@ when 'centos', 'redhat', 'fedora'
   include_recipe 'jpackage'
 end
 
-jetty_pkgs = value_for_platform(
-  %w(debian ubuntu) => {
-    'default' => ['jetty', 'libjetty-extra']
-  },
-  %w(centos redhat fedora) => {
-    'default' => ['jetty6', 'jetty6-jsp-2.1', 'jetty6-management']
-  },
+jetty_pkgs = value_for_platform_family(
+  'debian' => ['jetty', 'libjetty-extra'],
+  %w(rhel fedora) => ['jetty6', 'jetty6-jsp-2.1', 'jetty6-management'],
   'default' => ['jetty']
 )
-jetty_pkgs.each do |pkg|
-  package pkg do
-    action :install
-  end
+
+package jetty_pkgs do
+  action :install
 end
 
 service 'jetty' do
-  case node['platform']
-  when 'centos', 'redhat', 'fedora'
+  case node['platform_family']
+  when 'rhel', 'fedora'
     service_name 'jetty6'
     supports restart: true
-  when 'debian', 'ubuntu'
+  when 'debian'
     service_name 'jetty'
     supports restart: true, status: true
     action [:enable, :start]
