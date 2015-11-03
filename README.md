@@ -6,19 +6,20 @@ jetty Cookbook
 
 Installs and configures Jetty, Java servlet engine and webserver.
 
+
 Requirements
 ------------
 #### Platforms
-* Debian, Ubuntu (OpenJDK, Sun)
-* CentOS, Red Hat, Fedora (OpenJDK)
+- Debian, Ubuntu (OpenJDK, Sun)
+- CentOS, Red Hat, Fedora (OpenJDK)
 
 #### Chef
 - Chef 11+
 
 #### Cookbooks
-* java
-* jpackage
-* openssl
+- java
+- jpackage
+- openssl
 
 Attributes
 ----------
@@ -31,7 +32,7 @@ Attributes
 
 
 Recipes
--------------------
+-------
 
 ## default.rb
 
@@ -56,18 +57,19 @@ Usage
 Simply include the recipe where you want Jetty installed.
 
 TODO
-====
+----
 
 * enable SSL support
 * instrument logging
 
 License & Authors
 -----------------
-Author:: Seth Chisamore (<schisamo@chef.io>)
 
-Copyright:: 2010-2015, Chef Software, Inc
+**Author:** Cookbook Engineering Team (<cookbooks@chef.io>)
 
-```text
+**Copyright:** 2010-2015, Chef Software, Inc.
+
+```
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
