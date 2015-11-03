@@ -2,6 +2,11 @@ jetty cookbook CHANGELOG
 ========================
 This file is used to list changes made in each version of the jetty cookbook.
 
+v0.2.1
+------
+* Update another platform -> platform family
+* Add RHEL derivatives to the metadata
+
 v0.2.0
 ------
 * Use multipackage for package installs, which ups the minimum Chef release to 12.0 for this cookbook
