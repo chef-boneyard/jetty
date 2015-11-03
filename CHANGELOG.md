@@ -2,6 +2,12 @@ jetty cookbook CHANGELOG
 ========================
 This file is used to list changes made in each version of the jetty cookbook.
 
+v0.1.7
+------
+* Fix attributes to use a proper platform family so they are correctly set based on platform family
+* Add node['jetty']['install_java'] to control if java is installed via the java attribute or if the user manages java installs themselves.  Defaults to true
+* Test in Travis using kitchen-docker
+
 v0.1.6
 ------
 * Fix node attribute level in the recipe to fix Chef 12 support
