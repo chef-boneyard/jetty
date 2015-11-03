@@ -56,12 +56,6 @@ Usage
 
 Simply include the recipe where you want Jetty installed.
 
-TODO
-----
-
-* enable SSL support
-* instrument logging
-
 License & Authors
 -----------------
 
