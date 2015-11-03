@@ -33,18 +33,6 @@ package jetty_pkgs do
   action :install
 end
 
-service 'jetty' do
-  case node['platform_family']
-  when 'rhel', 'fedora'
-    service_name 'jetty6'
-    supports restart: true
-  when 'debian'
-    service_name 'jetty'
-    supports restart: true, status: true
-    action [:enable, :start]
-  end
-end
-
 template '/etc/default/jetty' do
   source 'default_jetty.erb'
   owner 'root'
@@ -59,4 +47,16 @@ template '/etc/jetty/jetty.xml' do
   group 'root'
   mode '0644'
   notifies :restart, 'service[jetty]'
+end
+
+service 'jetty' do
+  case node['platform_family']
+  when 'rhel', 'fedora'
+    service_name 'jetty6'
+    supports restart: true
+  when 'debian'
+    service_name 'jetty'
+    supports restart: true, status: true
+    action [:enable, :start]
+  end
 end
