@@ -29,7 +29,7 @@ Attributes
 * `node["jetty"]["java_options"]` - Extra options to pass to the JVM, default '-Xmx256m -Djava.awt.headless=true'.
 * `node["jetty"]["cargo"]["username"]` - Username that is granted access to the Cargo remote deploy app, if you are using it.
 * `node["jetty"]["cargo"]["password"]` - Password that grants access to the Cargo remote deploy app, if you are using it.
-
+* `node['jetty']['install_java']` - Install java via the java cookbook. Defaults to true
 
 Recipes
 -------
