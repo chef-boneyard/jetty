@@ -25,7 +25,7 @@ default['jetty']['cargo']['username'] = 'cargo'
 default['jetty']['cargo']['jetty6']['source']['url'] = 'http://repo1.maven.org/maven2/org/codehaus/cargo/cargo-jetty-6-and-earlier-deployer/1.2.2/cargo-jetty-6-and-earlier-deployer-1.2.2.war'
 default['jetty']['cargo']['jetty6']['source']['checksum'] = '34ea6285c48c31e579aee69ba138cf94015070aacafc1a993f37a9e6534fe064'
 
-case node.platform_family
+case node['platform_family']
 when 'rhel', 'fedora'
   set['jetty']['user'] = 'root'
   set['jetty']['group'] = 'root'
