@@ -14,7 +14,7 @@ Requirements
 - CentOS, Red Hat, Fedora (OpenJDK)
 
 #### Chef
-- Chef 11+
+- Chef 12+
 
 #### Cookbooks
 - java

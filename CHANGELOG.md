@@ -2,6 +2,12 @@ jetty cookbook CHANGELOG
 ========================
 This file is used to list changes made in each version of the jetty cookbook.
 
+v0.2.0
+------
+* Use multipackage for package installs, which ups the minimum Chef release to 12.0 for this cookbook
+* Use platform_family in the service setup and the package installation to better support RHEL and Debian derivatives
+* Start / Enable the service after we template the configs to prevent starting up an unconfigured server and then instantly restarting it
+
 v0.1.7
 ------
 * Fix attributes to use a proper platform family so they are correctly set based on platform family
