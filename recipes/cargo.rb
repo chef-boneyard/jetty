@@ -2,7 +2,7 @@
 # Cookbook Name:: jetty
 # Recipe:: cargo
 #
-# Copyright 2012, Chef Software, Inc.
+# Copyright 2012-2015, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ template '/etc/jetty/realm.properties' do
     username: node['jetty']['cargo']['username'],
     password: node['jetty']['cargo']['password']
   )
-  mode 0644
+  mode '0644'
   owner 'root'
   group 'root'
   notifies :restart, 'service[jetty]'
@@ -54,7 +54,7 @@ web_xml = node['jetty']['webapp_dir'] + '/cargo-jetty-6/WEB-INF/web.xml'
 
 cookbook_file web_xml do
   source 'web.xml'
-  mode 0644
+  mode '0644'
   owner 'jetty'
   group 'jetty'
   action :nothing
@@ -77,7 +77,7 @@ end
 remote_file '/usr/share/jetty/webapps/cargo-jetty-6-and-earlier-deployer-1.2.2.war' do
   source node['jetty']['cargo']['jetty6']['source']['url']
   checksum node['jetty']['cargo']['jetty6']['source']['checksum']
-  mode 0644
+  mode '0644'
   owner 'jetty'
   group 'jetty'
   notifies :run, 'script[extract war]', :immediately
