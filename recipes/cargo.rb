@@ -18,24 +18,9 @@
 
 include_recipe 'jetty::default'
 
-::Chef::Recipe.send(:include, Opscode::OpenSSL::Password)
-
-if Chef::Config[:solo]
-  if node['jetty']['cargo']['password'].nil?
-    Chef::Application.fatal!(['For chef-solo execution, you must set ',
-                              ' { ',
-                              '   "jetty": {',
-                              '     "cargo": {',
-                              '       "password": "temporarypassword"',
-                              '     }',
-                              '   }',
-                              ' }',
-                              ' in the json_attributes that are passed into chef-solo.'].join(' '))
-  else
-    node.normal['jetty']['cargo']['password'] = node['jetty']['cargo']['password'].crypt('Zz')
-  end
-else
-  node.set_unless['jetty']['cargo']['password'] = secure_password
+# The cookbook wont work without a password set so fail if it's not set
+unless node['jetty']['cargo']['password']
+  Chef::Application.fatal!("Cannot continue unless node['jetty']['cargo']['password'] is set")
 end
 
 template '/etc/jetty/realm.properties' do
@@ -50,10 +35,9 @@ template '/etc/jetty/realm.properties' do
   notifies :restart, 'service[jetty]'
 end
 
-web_xml = node['jetty']['webapp_dir'] + '/cargo-jetty-6/WEB-INF/web.xml'
-
-cookbook_file web_xml do
+cookbook_file 'web_xml' do
   source 'web.xml'
+  path node['jetty']['webapp_dir'] + '/cargo-jetty-6/WEB-INF/web.xml'
   mode '0644'
   owner 'jetty'
   group 'jetty'
