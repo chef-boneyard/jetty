@@ -2,6 +2,12 @@ jetty cookbook CHANGELOG
 ========================
 This file is used to list changes made in each version of the jetty cookbook.
 
+v0.3.0
+------
+* Removed the auto password generation in the cargo recipe. Users should specify their own password vs. having Chef auto generate a password that is saved onto the node. This removes the need for the openssl cookbook.
+- Removed duplicate platform specific node attributes
+- Fixed the webxml template compilation
+
 v0.2.1
 ------
 * Update another platform -> platform family
