@@ -19,7 +19,6 @@ Requirements
 #### Cookbooks
 - java
 - jpackage
-- openssl
 
 Attributes
 ----------
@@ -41,7 +40,7 @@ The default recipe will install the native package for Jetty. The service will b
 ## cargo.rb
 
 This recipe adds Cargo remote deploy support to the Jetty service by deploying the Cargo remote deployer app that is available at http://cargo.codehaus.org/Downloads . This recipe includes the default recipe.
-To establish a password, set a default attribute like so:
+You must set a password either using a wrapper cookbook or a role.  Example role settings:
 
   "default_attributes": {
     "jetty": {
