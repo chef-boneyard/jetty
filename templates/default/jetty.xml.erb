@@ -47,7 +47,7 @@
       <Arg>
           <New class="org.mortbay.jetty.nio.SelectChannelConnector">
             <Set name="host"><SystemProperty name="jetty.host" /></Set>
-            <Set name="port"><SystemProperty name="jetty.port" default="<% node["jetty"]["port"] %>"/></Set>
+            <Set name="port"><SystemProperty name="jetty.port" default="<%= node["jetty"]["port"] %>"/></Set>
             <Set name="maxIdleTime">60000</Set>
             <Set name="Acceptors">2</Set>
             <Set name="statsOn">false</Set>
