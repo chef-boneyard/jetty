@@ -18,18 +18,7 @@
 
 include_recipe 'java' if node['jetty']['install_java']
 
-case node['platform_family']
-when 'rhel', 'fedora'
-  include_recipe 'jpackage'
-end
-
-jetty_pkgs = value_for_platform_family(
-  'debian' => ['jetty', 'libjetty-extra'],
-  %w(rhel fedora) => ['jetty6', 'jetty6-jsp-2.1', 'jetty6-management'],
-  'default' => ['jetty']
-)
-
-package jetty_pkgs do
+package ['jetty', 'libjetty-extra'] do
   action :install
 end
 
@@ -50,13 +39,6 @@ template '/etc/jetty/jetty.xml' do
 end
 
 service 'jetty' do
-  case node['platform_family']
-  when 'rhel', 'fedora'
-    service_name 'jetty6'
-    supports restart: true
-  when 'debian'
-    service_name 'jetty'
-    supports restart: true, status: true
-    action [:enable, :start]
-  end
+  supports restart: true, status: true
+  action [:enable, :start]
 end

@@ -11,14 +11,12 @@ Requirements
 ------------
 #### Platforms
 - Debian, Ubuntu
-- RHEL, Fedora
 
 #### Chef
 - Chef 12+
 
 #### Cookbooks
 - java
-- jpackage
 
 Attributes
 ----------
@@ -26,8 +24,6 @@ Attributes
 * `node["jetty"]["port"]` - The network port used by Jetty, default '8080'.
 * `node["jetty"]["jetty_args"]` - Additional arguments to pass to Jetty, default ''.
 * `node["jetty"]["java_options"]` - Extra options to pass to the JVM, default '-Xmx256m -Djava.awt.headless=true'.
-* `node["jetty"]["cargo"]["username"]` - Username that is granted access to the Cargo remote deploy app, if you are using it.
-* `node["jetty"]["cargo"]["password"]` - Password that grants access to the Cargo remote deploy app, if you are using it.
 * `node['jetty']['install_java']` - Install java via the java cookbook. Defaults to true
 
 Recipes
@@ -37,23 +33,12 @@ Recipes
 
 The default recipe will install the native package for Jetty. The service will be managed via the package provided init scripts.
 
-## cargo.rb
-
-This recipe adds Cargo remote deploy support to the Jetty service by deploying the Cargo remote deployer app that is available at http://cargo.codehaus.org/Downloads . This recipe includes the default recipe.
-You must set a password either using a wrapper cookbook or a role.  Example role settings:
-
-  "default_attributes": {
-    "jetty": {
-      "cargo": {
-        "password": "cargo123"
-      }
-    }
-  },
 
 Usage
 -----
 
 Simply include the recipe where you want Jetty installed.
+
 
 License & Authors
 -----------------
