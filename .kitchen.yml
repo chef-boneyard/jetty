@@ -5,14 +5,10 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: centos-6.7
-  - name: centos-7.1
   - name: debian-7.8
     run_list: apt::default
   - name: debian-8.1
     run_list: apt::default
-  - name: fedora-21
-  - name: fedora-22
   - name: ubuntu-12.04
     run_list: apt::default
   - name: ubuntu-14.04
@@ -22,10 +18,3 @@ suites:
   - name: default
     run_list:
       - recipe[jetty::default]
-  - name: cargo
-    run_list:
-      - recipe[jetty::cargo]
-    attributes:
-      jetty:
-        cargo:
-          password: 1234
