@@ -6,9 +6,7 @@ description      'Installs/Configures jetty'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
 version          '0.3.1'
 
-%w( java jpackage ).each do |cb|
-  depends cb
-end
+depends 'java'
 
 %w( debian ubuntu centos redhat fedora scientific oracle amazon ).each do |os|
   supports os
