@@ -8,7 +8,7 @@ version          '0.3.1'
 
 depends 'java'
 
-%w( debian ubuntu centos redhat fedora scientific oracle amazon ).each do |os|
+%w( debian ubuntu ).each do |os|
   supports os
 end
 
