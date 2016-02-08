@@ -1,49 +1,34 @@
-jetty Cookbook
-==============
-
-[![Build Status](https://travis-ci.org/chef-cookbooks/jetty.svg?branch=master)](http://travis-ci.org/chef-cookbooks/jetty)
-[![Cookbook Version](https://img.shields.io/cookbook/v/jetty.svg)](https://supermarket.chef.io/cookbooks/jetty)
+# jetty Cookbook
+[![Build Status](https://travis-ci.org/chef-cookbooks/jetty.svg?branch=master)](http://travis-ci.org/chef-cookbooks/jetty) [![Cookbook Version](https://img.shields.io/cookbook/v/jetty.svg)](https://supermarket.chef.io/cookbooks/jetty)
 
 Installs and configures Jetty, Java servlet engine and webserver.
 
-
-Requirements
-------------
-#### Platforms
+## Requirements
+### Platforms
 - Debian, Ubuntu
 
-#### Chef
+### Chef
 - Chef 12+
 
-#### Cookbooks
+### Cookbooks
 - java
 
-Attributes
-----------
-* `node["jetty"]["host"]` - Listen to connections from this network host, default '0.0.0.0'.
-* `node["jetty"]["port"]` - The network port used by Jetty, default '8080'.
-* `node["jetty"]["jetty_args"]` - Additional arguments to pass to Jetty, default ''.
-* `node["jetty"]["java_options"]` - Extra options to pass to the JVM, default '-Xmx256m -Djava.awt.headless=true'.
-* `node['jetty']['install_java']` - Install java via the java cookbook. Defaults to true
+## Attributes
+- `node["jetty"]["host"]` - Listen to connections from this network host, default '0.0.0.0'.
+- `node["jetty"]["port"]` - The network port used by Jetty, default '8080'.
+- `node["jetty"]["jetty_args"]` - Additional arguments to pass to Jetty, default ''.
+- `node["jetty"]["java_options"]` - Extra options to pass to the JVM, default '-Xmx256m -Djava.awt.headless=true'.
+- `node['jetty']['install_java']` - Install java via the java cookbook. Defaults to true
 
-Recipes
--------
-
+## Recipes
 ## default.rb
-
 The default recipe will install the native package for Jetty. The service will be managed via the package provided init scripts.
 
-
-Usage
------
-
+## Usage
 Simply include the recipe where you want Jetty installed.
 
-
-License & Authors
------------------
-
-**Author:** Cookbook Engineering Team (<cookbooks@chef.io>)
+## License & Authors
+**Author:** Cookbook Engineering Team ([cookbooks@chef.io](mailto:cookbooks@chef.io))
 
 **Copyright:** 2010-2015, Chef Software, Inc.
 
