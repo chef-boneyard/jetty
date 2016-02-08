@@ -3,6 +3,9 @@
 
 Installs and configures Jetty, Java servlet engine and webserver.
 
+# DEPRECATION NOTICE
+Due to the conservative nature of packaging in LTS distributions there doesn't exist a way to install a current jetty packages across distros. We don't believe the package install workflow matches the installation workflow of most users run jetty applications. Due to this we've decided to deprecate this cookbook.  We're open to a new approach to either installing or managing jetty. If this interests you e-mail us at cookbooks@chef.io
+
 ## Requirements
 ### Platforms
 - Debian, Ubuntu

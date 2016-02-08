@@ -1,6 +1,9 @@
 # jetty cookbook CHANGELOG
 This file is used to list changes made in each version of the jetty cookbook.
 
+## v0.4.1
+- Deprecated the cookbook. See the readme for additional information
+
 ## v0.4.0
 - Remove the cargo recipe. This was outside the scope of this cookbook
 - Remove RHEL install support. This was entirely broken and we need to rethink how we do it.  Expect this to be fixed in 1.0
